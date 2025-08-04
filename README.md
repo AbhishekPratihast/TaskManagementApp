@@ -1,16 +1,19 @@
 # TaskManagement App
 
-A powerful and intuitive productivity app designed to help you stay focused, organized, and motivated in your daily life. Whether you're working, studying, or managing personal tasks, this app has everything you need to achieve your goals.
+Not just a simple Task Management App But A powerful and intuitive productivity app designed to help you stay focused, organized, and motivated in your daily life. Whether you're working, studying, or managing personal tasks, this app has everything you need to achieve your goals.
 
 ---
 
 
 ## 🖼️ How the app looks like
-
-![Pomodoro Timer](screenshots/pomodoro.png)
-![To-Do List](screenshots/todolist.png)
-![Analytics](screenshots/analytics.png)
-![Settings](screenshots/settings.png)
+### Main Page(Pomodoro Timer)
+![Pomodoro Timer](./MainPomodoro.png) 
+### Task(todo list)
+![To-Do List](./TaskTOdo.png)
+### Analytics + Rewards Tokens
+![Analytics](./Analyticsimg.png)
+### Settings
+![Settings](./settingsimg.png)
 
 ---
 
