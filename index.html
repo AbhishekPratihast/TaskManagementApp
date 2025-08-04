@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow - Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- LottieFiles CDN for animations (optional, for advanced animations) -->
+    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> -->
+</head>
+<body data-theme="light">
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">&#127813; FocusFlow</div>
+            <div class="header-controls">
+                <button class="sound-toggle" id="soundToggle" title="Toggle Background Sound">&#128266;</button>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">&#127769;</button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="timer">Timer</button>
+            <button class="nav-tab" data-tab="tasks">Tasks</button>
+            <button class="nav-tab" data-tab="analytics">Analytics</button>
+            <button class="nav-tab" data-tab="settings">Settings</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Timer Tab -->
+            <div class="tab-content active" id="timer-tab">
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <div class="timer-progress" id="timerProgress"></div>
+                        <div class="timer-display">
+                            <div class="timer-time" id="timerDisplay">25:00</div>
+                            <div class="timer-label" id="timerLabel">Work Session</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" id="startBtn">&#9654;&#65039; Start</button>
+                        <button class="btn btn-secondary" id="pauseBtn">&#9208;&#65039; Pause</button>
+                        <button class="btn btn-secondary" id="resetBtn">&#128260; Reset</button>
+                        <button class="btn btn-secondary" id="focusBtn">&#127919; Focus Mode</button>
+                    </div>
+                </div>
+
+                <div class="timer-settings">
+                    <h3>Timer Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="workDuration">Work Duration (minutes)</label>
+                            <input type="number" id="workDuration" value="25" min="1" max="60">
+                        </div>
+                        <div class="setting-item">
+                            <label for="shortBreak">Short Break (minutes)</label>
+                            <input type="number" id="shortBreak" value="5" min="1" max="30">
+                        </div>
+                        <div class="setting-item">
+                            <label for="longBreak">Long Break (minutes)</label>
+                            <input type="number" id="longBreak" value="15" min="1" max="60">
+                        </div>
+                        <div class="setting-item">
+                            <label for="longBreakInterval">Sessions until Long Break</label>
+                            <input type="number" id="longBreakInterval" value="4" min="2" max="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote-container" id="quoteContainer" style="display: none;">
+                    <div class="quote-text" id="quoteText"></div>
+                    <div class="quote-author" id="quoteAuthor"></div>
+                </div>
+            </div>
+
+            <!-- Tasks Tab -->
+            <div class="tab-content" id="tasks-tab">
+                <div class="task-section">
+                    <div class="task-list">
+                        <h3>Task Management</h3>
+                        <div class="task-input-container">
+                            <input type="text" class="task-input" id="taskInput" placeholder="Add a new task...">
+                            <select id="taskPriority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                            <select id="taskCategory">
+                                <option value="work">Work</option>
+                                <option value="personal">Personal</option>
+                                <option value="study">Study</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <button class="btn btn-primary" id="addTaskBtn">Add</button>
+                        </div>
+                        <div id="taskList"></div>
+                    </div>
+                    
+                    <div>
+                        <div class="task-list">
+                            <h3>Quick Stats</h3>
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalTasks">0</div>
+                                <div class="stat-label">Total Tasks</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="completedTasks">0</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="completionRate">0%</div>
+                                <div class="stat-label">Completion Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics-tab">
+                <div class="analytics-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalSessions">0</div>
+                        <div class="stat-label">Total Sessions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalFocusTime">0h</div>
+                        <div class="stat-label">Focus Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="currentStreak">0</div>
+                        <div class="stat-label">Current Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalPoints">0</div>
+                        <div class="stat-label">Points Earned</div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>&#127942; Achievements</h3>
+                    <div id="achievementsList">
+                        <div class="achievement-item">
+                            <span>&#129353; First Session - Complete your first Pomodoro session</span>
+                            <span class="achievement-status" id="achievement-first">&#10060;</span>
+                        </div>
+                        <div class="achievement-item">
+                            <span>&#128293; Streak Master - Maintain a 5-day streak</span>
+                            <span class="achievement-status" id="achievement-streak">&#10060;</span>
+                        </div>
+                        <div class="achievement-item">
+                            <span>&#128218; Focused Learner - Complete 10 sessions</span>
+                            <span class="achievement-status" id="achievement-sessions">&#10060;</span>
+                        </div>
+                        <div class="achievement-item">
+                            <span>&#9889; Power User - Complete 25 sessions</span>
+                            <span class="achievement-status" id="achievement-power">&#10060;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings-tab">
+                <div class="settings-section">
+                    <h3>&#128266; Sound Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="backgroundSound">Background Sound</label>
+                            <select id="backgroundSound">
+                                <option value="none">None</option>
+                                <option value="rain">Rain</option>
+                                <option value="forest">Forest</option>
+                                <option value="cafe">Café</option>
+                                <option value="ocean">Ocean</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="volumeControl">Volume</label>
+                            <input type="range" id="volumeControl" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>&#128276; Notification Settings</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="enableNotifications" checked>
+                            Enable browser notifications
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="enableSounds" checked>
+                            Enable notification sounds
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>&#127919; Goals</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="dailyGoal">Daily Session Goal</label>
+                            <input type="number" id="dailyGoal" value="8" min="1" max="20">
+                        </div>
+                        <div class="setting-item">
+                            <label for="weeklyGoal">Weekly Session Goal</label>
+                            <input type="number" id="weeklyGoal" value="40" min="1" max="100">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>&#128467;&#65039; Data Management</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <button class="btn btn-secondary" id="exportDataBtn">Export Data</button>
+                        </div>
+                        <div class="setting-item">
+                            <button class="btn btn-secondary" id="clearDataBtn">Clear All Data</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>&#128197; Integrations (Coming Soon)</h3>
+                    <p class="text-secondary">Google Calendar, To-Do Apps</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Focus Mode -->
+    <div class="focus-mode" id="focusMode">
+        <button class="focus-exit" id="exitFocus">&#10005; Exit Focus</button>
+        <div class="focus-timer" id="focusTimer">25:00</div>
+        <div class="timer-label" id="focusLabel">Work Session</div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Achievement Badge -->
+    <div class="achievement-badge" id="achievementBadge">
+        <h3>&#127942; Achievement Unlocked!</h3>
+        <p id="achievementText"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
