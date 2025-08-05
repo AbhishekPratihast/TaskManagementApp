@@ -1,4 +1,5 @@
-[![🚀 Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-CLICK%20HERE-brightgreen?style=for-the-badge)](https://abhishekpratihast.github.io/TaskManagementApp/)
+[![🚀 Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-CLICK%20HERE-brightgreen?style=for-the-badge&logo=github&logoColor=white&color=0f9d58)](https://abhishekpratihast.github.io/TaskManagementApp/)
+
 # TaskManagement App
 
 Not just a simple Task Management App But A powerful and intuitive productivity app designed to help you stay focused, organized, and motivated in your daily life. Whether you're working, studying, or managing personal tasks, this app has everything you need to achieve your goals.
