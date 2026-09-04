@@ -1,4 +1,4 @@
-[![🚀 Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-CLICK%20HERE-brightgreen?style=for-the-badge&logo=github&logoColor=white&color=0f9d58)](https://zappy-groceryweb-apps.vercel.app/)
+[![🚀 Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-CLICK%20HERE-brightgreen?style=for-the-badge&logo=github&logoColor=white&color=0f9d58)](https://task-management-app-rust-alpha.vercel.app/)
 
 # TaskManagement App
 
