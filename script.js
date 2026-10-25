@@ -14,7 +14,6 @@ class PomodoroApp {
         this.setupOfflineSupport();
     }
 
-
     initializeData() {
         // Timer state
         this.timerInterval = null;
