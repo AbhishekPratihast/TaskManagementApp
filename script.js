@@ -12,7 +12,7 @@ class PomodoroApp {
         this.checkAchievements(false); // Don't show badge on load
         this.requestNotificationPermission();
         this.setupOfflineSupport();
-    } 
+    }
  
     initializeData() {
         // Timer state
