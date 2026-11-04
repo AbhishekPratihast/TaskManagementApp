@@ -13,7 +13,6 @@ class PomodoroApp {
         this.requestNotificationPermission();
         this.setupOfflineSupport();
     } 
-
     initializeData() {
         // Timer state
         this.timerInterval = null;
